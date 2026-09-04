@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUDIO ARQ - Portafolio e Investigación Arquitectónica</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Playfair Display (Titulares) y Plus Jakarta Sans (Cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            linen: '#F9F6F0',
+            charcoal: '#1A1A1A',
+            warmgray: '#706C66',
+            terracotta: '#C87D55',
+            toasted: '#E2D3C1',
+            sage: '#8A9A86',
+            amberwood: '#D99B6A',
+            softblue: '#7B92A6'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 25s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-linen text-charcoal font-sans antialiased selection:bg-terracotta selection:text-white min-h-screen flex flex-col relative">
+
+  <!-- BANNER TIKER DE NOTICIAS DE LA SEMANA -->
+  <div class="bg-charcoal text-linen text-xs py-2 overflow-hidden border-b border-warmgray/20 relative z-50">
+    <div class="animate-marquee whitespace-nowrap flex gap-12 items-center">
+      <span class="flex items-center gap-2">
+        <span class="bg-terracotta text-white font-bold px-1.5 py-0.5 rounded text-[10px]">NUEVO</span>
+        MVRDV completa la remodelación bioclimática de la Galería Nacional de Arte Moderno.
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="bg-sage text-white font-bold px-1.5 py-0.5 rounded text-[10px]">SOSTENIBILIDAD</span>
+        Lanzan la primera guía global de uso de bambú estructural en edificios multipiso.
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="bg-softblue text-white font-bold px-1.5 py-0.5 rounded text-[10px]">EVENTO</span>
+        Bienal de Arquitectura de Venecia abre convocatoria de maquetas para investigación espacial.
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="bg-amberwood text-white font-bold px-1.5 py-0.5 rounded text-[10px]">PREMIO</span>
+        Foster + Partners gana concurso para la nueva terminal neutra en carbono en Escandinavia.
+      </span>
+      
+      <!-- Duplicado para loop continuo -->
+      <span class="flex items-center gap-2">
+        <span class="bg-terracotta text-white font-bold px-1.5 py-0.5 rounded text-[10px]">NUEVO</span>
+        MVRDV completa la remodelación bioclimática de la Galería Nacional de Arte Moderno.
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="bg-sage text-white font-bold px-1.5 py-0.5 rounded text-[10px]">SOSTENIBILIDAD</span>
+        Lanzan la primera guía global de uso de bambú estructural en edificios multipiso.
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="bg-softblue text-white font-bold px-1.5 py-0.5 rounded text-[10px]">EVENTO</span>
+        Bienal de Arquitectura de Venecia abre convocatoria de maquetas para investigación espacial.
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="bg-amberwood text-white font-bold px-1.5 py-0.5 rounded text-[10px]">PREMIO</span>
+        Foster + Partners gana concurso para la nueva terminal neutra en carbono en Escandinavia.
+      </span>
+    </div>
+  </div>
+
+  <!-- HEADER FIJO -->
+  <header class="sticky top-0 z-40 bg-linen/95 backdrop-blur-md border-b border-warmgray/15 px-6 md:px-12 py-4 flex justify-between items-center transition-all">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="showHome()">
+      <!-- Decoración Ilustrativa Minimalista -->
+      <svg class="w-8 h-8 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m-2 4h2m4-4h2m-2 4h2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="18" r="1" fill="currentColor"/>
+      </svg>
+      <div>
+        <h1 class="font-serif text-xl tracking-wider uppercase font-bold text-charcoal">STUDIO ARQ</h1>
+        <p class="text-[10px] text-warmgray tracking-widest uppercase font-semibold">Plataforma Editorial & Archivo</p>
+      </div>
+    </div>
+    
+    <div class="flex items-center space-x-4 md:space-x-6 text-sm font-medium text-warmgray">
+      <!-- Botón Principal de Acción -->
+      <button onclick="openModal()" class="bg-terracotta hover:bg-amberwood text-white px-4 py-2 rounded-md font-semibold text-xs uppercase tracking-wider flex items-center gap-2 transition-all shadow-sm">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Publicar Proyecto</span>
+      </button>
+
+      <button id="lang-btn" onclick="toggleLanguage()" class="flex items-center gap-1 hover:text-charcoal transition-colors">
+        <i data-lucide="globe" class="w-4 h-4"></i>
+        <span id="lang-text">ES</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ILUSTRACIÓN Y DECORACIÓN MINIMALISTA EN EL CANVAS -->
+  <div class="absolute top-28 left-8 text-warmgray/15 pointer-events-none hidden lg:block">
+    <svg class="w-24 h-24" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+      <circle cx="50" cy="50" r="40" stroke-dasharray="4 4" />
+      <path d="M50 10 L50 90 M10 50 L90 50" />
+      <path d="M20 20 L80 80" stroke-dasharray="2 2" />
+    </svg>
+  </div>
+  <div class="absolute top-96 right-8 text-warmgray/15 pointer-events-none hidden lg:block">
+    <svg class="w-20 h-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+      <rect x="20" y="20" width="60" height="60" />
+      <circle cx="50" cy="50" r="20" />
+    </svg>
+  </div>
+
+  <!-- VISTA PRINCIPAL (HOME / FEED CATEGORIZADO) -->
+  <main id="view-home" class="max-w-7xl mx-auto px-6 md:px-12 py-8 w-full flex-grow relative z-10">
+    
+    <!-- NAVEGACIÓN Y SECCIONES DE PRIMER PLANO (DESTACADAS) -->
+    <section class="mb-10">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-lg font-bold text-charcoal flex items-center gap-2">
+          <i data-lucide="layout-grid" class="w-5 h-5 text-terracotta"></i>
+          Explorar Secciones Principales
+        </h2>
+        <span class="text-xs text-warmgray">Selecciona una categoría para filtrar</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        <button onclick="filterCategory('Todos')" class="cat-card active bg-white border border-terracotta/30 p-3 rounded-lg flex flex-col items-center text-center transition-all hover:border-terracotta shadow-sm" data-cat="Todos">
+          <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center text-terracotta mb-2">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-bold text-charcoal">Todos</span>
+          <span class="text-[10px] text-warmgray mt-0.5">Exploración total</span>
+        </button>
+
+        <button onclick="filterCategory('Arquitectura')" class="cat-card bg-white border border-warmgray/15 p-3 rounded-lg flex flex-col items-center text-center transition-all hover:border-terracotta shadow-sm" data-cat="Arquitectura">
+          <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center text-sage mb-2">
+            <i data-lucide="building-2" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-bold text-charcoal">Arquitectura</span>
+          <span class="text-[10px] text-warmgray mt-0.5">Obras y Estructuras</span>
+        </button>
+
+        <button onclick="filterCategory('Diseño de Interiores')" class="cat-card bg-white border border-warmgray/15 p-3 rounded-lg flex flex-col items-center text-center transition-all hover:border-terracotta shadow-sm" data-cat="Diseño de Interiores">
+          <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center text-amberwood mb-2">
+            <i data-lucide="armchair" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-bold text-charcoal">Interiores</span>
+          <span class="text-[10px] text-warmgray mt-0.5">Ambientes & Atmosferas</span>
+        </button>
+
+        <button onclick="filterCategory('Detalle Técnico & Maquetas')" class="cat-card bg-white border border-warmgray/15 p-3 rounded-lg flex flex-col items-center text-center transition-all hover:border-terracotta shadow-sm" data-cat="Detalle Técnico & Maquetas">
+          <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center text-softblue mb-2">
+            <i data-lucide="box" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-bold text-charcoal">Técnico & Maquetas</span>
+          <span class="text-[10px] text-warmgray mt-0.5">Procesos & Escala</span>
+        </button>
+
+        <button onclick="filterCategory('Investigación & Ensayos')" class="cat-card bg-white border border-warmgray/15 p-3 rounded-lg flex flex-col items-center text-center transition-all hover:border-terracotta shadow-sm" data-cat="Investigación & Ensayos">
+          <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center text-terracotta mb-2">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-bold text-charcoal">Investigación</span>
+          <span class="text-[10px] text-warmgray mt-0.5">Publicaciones & Análisis</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- RED DE PROYECTOS (GRID ASIMÉTRICO / TIPO REVISTA) -->
+    <section id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-opacity duration-250">
+      <!-- Los proyectos se cargan dinámicamente desde Javascript -->
+    </section>
+  </main>
+
+  <!-- VISTA DETALLE DE PROYECTO (CASE STUDY INMERSIVO) -->
+  <article id="view-detail" class="hidden max-w-6xl mx-auto px-6 md:px-12 py-8 w-full flex-grow relative z-10">
+    
+    <button onclick="showHome()" class="text-xs uppercase tracking-widest text-warmgray hover:text-charcoal mb-6 inline-flex items-center gap-2 transition-colors font-semibold">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al Feed
+    </button>
+
+    <!-- CABECERA DEL PROYECTO -->
+    <header class="border-b border-warmgray/20 pb-8 mb-12">
+      <div class="flex items-center gap-3 mb-3">
+        <span id="detail-category" class="bg-terracotta/10 text-terracotta border border-terracotta/20 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+        <span id="detail-badge" class="bg-sage/10 text-sage border border-sage/20 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+      </div>
+      <h1 id="detail-title" class="font-serif text-3xl md:text-5xl text-charcoal mb-6 leading-tight font-bold"></h1>
+      <p id="detail-description" class="text-warmgray text-base leading-relaxed mb-8 max-w-3xl"></p>
+      
+      <!-- Ficha Técnica -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 p-5 bg-white border border-warmgray/15 rounded-lg text-sm shadow-sm">
+        <div>
+          <span class="block text-[10px] uppercase tracking-wider text-warmgray font-semibold mb-0.5">Superficie / Extensión</span>
+          <span id="spec-surface" class="font-bold text-charcoal"></span>
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-wider text-warmgray font-semibold mb-0.5">Ubicación</span>
+          <span id="spec-location" class="font-bold text-charcoal"></span>
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-wider text-warmgray font-semibold mb-0.5">Tipología</span>
+          <span id="spec-typology" class="font-bold text-charcoal"></span>
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-wider text-warmgray font-semibold mb-0.5">Softwares / Herramientas</span>
+          <span id="spec-software" class="font-bold text-charcoal"></span>
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-wider text-warmgray font-semibold mb-0.5">Paleta Materiales</span>
+          <span id="spec-materials" class="font-bold text-charcoal"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- BLOQUE 01: CONCEPTO Y GALERÍA DE BOCETOS/INVESTIGACIÓN -->
+    <section class="mb-16">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-6">
+        <h2 class="font-serif text-2xl font-bold flex items-center gap-2">
+          <span class="text-terracotta">01.</span> Concepto, Bocetos e Investigación
+        </h2>
+        
+        <div class="inline-flex space-x-1 bg-white p-1 rounded border border-warmgray/15 self-start">
+          <button id="btn-tab-sketches" onclick="switchConceptTab('sketches')" class="px-4 py-1.5 text-xs font-semibold rounded transition-all bg-linen text-charcoal">Bocetos & Proceso</button>
+          <button id="btn-tab-diagrams" onclick="switchConceptTab('diagrams')" class="px-4 py-1.5 text-xs font-semibold rounded transition-all text-warmgray hover:text-charcoal">Diagramas Espaciales</button>
+        </div>
+      </div>
+
+      <div id="concept-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Carga dinámicamente -->
+      </div>
+    </section>
+
+    <!-- BLOQUE 02: PLANO INTERACTIVO -->
+    <section id="block-hotspots" class="mb-16">
+      <h2 class="font-serif text-2xl font-bold mb-6 flex items-center gap-2">
+        <span class="text-terracotta">02.</span> Plano Técnico & Puntos de Interés
+      </h2>
+      <div class="relative bg-white border border-warmgray/20 rounded-lg p-6 min-h-[400px] flex items-center justify-center overflow-hidden shadow-sm">
+        
+        <div class="relative w-full max-w-2xl h-80 border-2 border-dashed border-warmgray/30 flex items-center justify-center bg-linen/30 rounded-lg">
+          <span class="text-xs text-warmgray tracking-widest uppercase font-bold flex items-center gap-2">
+            <i data-lucide="compass" class="w-4 h-4 text-terracotta"></i>
+            Lienzo Gráfico del Plano Téchnico
+          </span>
+          <div id="hotspots-container"></div>
+        </div>
+
+        <!-- Popover -->
+        <div id="hotspot-popover" class="hidden absolute bottom-6 right-6 max-w-sm bg-linen border border-warmgray/20 p-4 rounded-lg shadow-xl z-20">
+          <div class="flex justify-between items-start mb-2">
+            <h3 id="popover-title" class="font-serif font-bold text-sm text-charcoal"></h3>
+            <button onclick="closePopover()" class="text-warmgray hover:text-charcoal p-0.5">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <img id="popover-img" src="" alt="Detalle" class="w-full h-32 object-cover rounded mb-2">
+          <p id="popover-desc" class="text-xs text-warmgray leading-relaxed"></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE 03: TRANSFORMACIÓN ESPACIAL (SLIDER) -->
+    <section id="block-slider" class="mb-16">
+      <h2 class="font-serif text-2xl font-bold mb-6 flex items-center gap-2">
+        <span class="text-terracotta">03.</span> Transformación Espacial (Antes & Después)
+      </h2>
+      <div 
+        id="comparison-slider" 
+        class="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-lg border border-warmgray/20 select-none cursor-ew-resize shadow-sm"
+      >
+        <img id="img-after" src="" alt="Después" class="absolute inset-0 w-full h-full object-cover">
+        <span class="absolute top-4 right-4 bg-charcoal/85 backdrop-blur-sm text-white text-xs px-3 py-1 rounded uppercase font-bold tracking-wider">Después / Finalizado</span>
+
+        <div id="slider-before-container" class="absolute inset-0 overflow-hidden border-r-2 border-white shadow-2xl" style="width: 50%;">
+          <img id="img-before" src="" alt="Antes" class="absolute inset-0 w-full h-full object-cover max-w-none">
+          <span class="absolute top-4 left-4 bg-charcoal/85 backdrop-blur-sm text-white text-xs px-3 py-1 rounded uppercase font-bold tracking-wider">Antes / Estado Previo</span>
+        </div>
+
+        <div id="slider-handle" class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize flex items-center justify-center" style="left: 50%;">
+          <div class="w-8 h-8 bg-white text-charcoal rounded-full flex items-center justify-center shadow-md border border-warmgray/20">
+            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-terracotta"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 04: GALERÍA DE RENDERS Y RESULTADO -->
+    <section class="mb-12">
+      <h2 class="font-serif text-2xl font-bold mb-6 flex items-center gap-2">
+        <span class="text-terracotta">04.</span> Galería de Renders & Fotografía Final
+      </h2>
+      <div class="relative group overflow-hidden rounded-lg border border-warmgray/10 bg-white shadow-sm">
+        <img id="detail-render-main" src="" alt="Render principal" class="w-full h-[450px] md:h-[550px] object-cover transition-transform duration-500 group-hover:scale-[1.01]">
+        
+        <div class="absolute inset-0 bg-charcoal/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <button onclick="openLightbox(document.getElementById('detail-render-main').src)" class="bg-linen text-charcoal text-xs font-bold px-6 py-3 rounded tracking-wider uppercase shadow-lg hover:bg-toasted transition-colors flex items-center gap-2">
+            <i data-lucide="maximize-2" class="w-4 h-4 text-terracotta"></i>
+            Ver Detalle a Máxima Resolución
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </article>
+
+  <!-- MODAL PARA AGREGAR NUEVO PROYECTO / INVESTIGACIÓN -->
+  <div id="modal-add-project" class="hidden fixed inset-0 z-50 bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-linen border border-warmgray/20 rounded-xl max-w-2xl w-full p-6 md:p-8 shadow-2xl relative my-8">
+      
+      <button onclick="closeModal()" class="absolute top-5 right-5 text-warmgray hover:text-charcoal p-1">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center font-bold">
+          <i data-lucide="file-plus-2" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="font-serif text-2xl font-bold text-charcoal">Publicar en el Portafolio</h2>
+          <p class="text-xs text-warmgray">Sube tu proyecto, detalle técnico o investigación académica</p>
+        </div>
+      </div>
+
+      <form id="form-project" onsubmit="handleSaveProject(event)" class="space-y-4">
+        
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Título del Proyecto / Investigación</label>
+          <input type="text" id="input-title" required placeholder="Ej. Museo de Arte Moderno y Sostenible" class="w-full bg-white border border-warmgray/20 rounded p-2.5 text-sm focus:outline-none focus:border-terracotta">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Categoría</label>
+            <select id="input-category" required class="w-full bg-white border border-warmgray/20 rounded p-2.5 text-sm focus:outline-none focus:border-terracotta">
+              <option value="Arquitectura">Arquitectura</option>
+              <option value="Diseño de Interiores">Diseño de Interiores</option>
+              <option value="Detalle Técnico & Maquetas">Detalle Técnico & Maquetas</option>
+              <option value="Investigación & Ensayos">Investigación & Ensayos</option>
+              <option value="Transformaciones">Transformaciones</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Estado / Badge</label>
+            <select id="input-badge" class="w-full bg-white border border-warmgray/20 rounded p-2.5 text-sm focus:outline-none focus:border-terracotta">
+              <option value="Caso de Estudio">Caso de Estudio</option>
+              <option value="Proceso Completo">Proceso Completo</option>
+              <option value="Publicación Académica">Publicación Académica</option>
+              <option value="Propuesta Urbana">Propuesta Urbana</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Descripción General / Resumen</label>
+          <textarea id="input-description" rows="3" required placeholder="Describe la propuesta, concepto, metodología o alcance de la investigación..." class="w-full bg-white border border-warmgray/20 rounded p-2.5 text-sm focus:outline-none focus:border-terracotta"></textarea>
+        </div>
+
+        <!-- SECCIÓN DE CARGA DE IMÁGENES -->
+        <div class="border-t border-b border-warmgray/15 py-4 my-2 space-y-3">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-terracotta flex items-center gap-1.5">
+            <i data-lucide="image" class="w-4 h-4"></i>
+            Imágenes del Proyecto
+          </h3>
+
+          <div>
+            <label class="block text-xs font-semibold text-warmgray mb-1">Imagen de Portada (URL o Subir Archivo)</label>
+            <div class="flex gap-2">
+              <input type="text" id="input-cover-url" placeholder="URL de la imagen (https://...)" class="flex-grow bg-white border border-warmgray/20 rounded p-2 text-xs focus:outline-none focus:border-terracotta">
+              <label class="bg-warmgray/10 hover:bg-warmgray/20 text-charcoal px-3 py-2 rounded text-xs cursor-pointer font-semibold transition-colors flex items-center gap-1">
+                <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                <span>Subir</span>
+                <input type="file" accept="image/*" onchange="handleFileUpload(event, 'input-cover-url')" class="hidden">
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-warmgray mb-1">Imagen de Boceto / Proceso Concepto (URL o Subir)</label>
+            <div class="flex gap-2">
+              <input type="text" id="input-sketch-url" placeholder="URL del boceto..." class="flex-grow bg-white border border-warmgray/20 rounded p-2 text-xs focus:outline-none focus:border-terracotta">
+              <label class="bg-warmgray/10 hover:bg-warmgray/20 text-charcoal px-3 py-2 rounded text-xs cursor-pointer font-semibold transition-colors flex items-center gap-1">
+                <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                <span>Subir</span>
+                <input type="file" accept="image/*" onchange="handleFileUpload(event, 'input-sketch-url')" class="hidden">
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-warmgray mb-1">Imagen Estado Previo (Para Antes/Después - Opcional)</label>
+            <div class="flex gap-2">
+              <input type="text" id="input-before-url" placeholder="URL imagen estado previo..." class="flex-grow bg-white border border-warmgray/20 rounded p-2 text-xs focus:outline-none focus:border-terracotta">
+              <label class="bg-warmgray/10 hover:bg-warmgray/20 text-charcoal px-3 py-2 rounded text-xs cursor-pointer font-semibold transition-colors flex items-center gap-1">
+                <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                <span>Subir</span>
+                <input type="file" accept="image/*" onchange="handleFileUpload(event, 'input-before-url')" class="hidden">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- FICHA TÉCNICA CAMPOS -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+          <div>
+            <label class="block font-semibold text-warmgray mb-1">Superficie (m²)</label>
+            <input type="text" id="input-surface" placeholder="Ej. 120 m²" class="w-full bg-white border border-warmgray/20 rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold text-warmgray mb-1">Ubicación</label>
+            <input type="text" id="input-location" placeholder="Ej. Bogotá, Col." class="w-full bg-white border border-warmgray/20 rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold text-warmgray mb-1">Tipología</label>
+            <input type="text" id="input-typology" placeholder="Ej. Equipamiento" class="w-full bg-white border border-warmgray/20 rounded p-2">
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-4">
+          <button type="button" onclick="closeModal()" class="px-5 py-2.5 rounded border border-warmgray/20 text-warmgray font-semibold text-xs uppercase tracking-wider hover:bg-warmgray/10 transition-colors">Cancelar</button>
+          <button type="submit" class="px-6 py-2.5 rounded bg-terracotta hover:bg-amberwood text-white font-bold text-xs uppercase tracking-wider shadow transition-colors flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            Guardar & Publicar
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX / VISOR EN PANTALLA COMPLETA -->
+  <div id="lightbox" class="hidden fixed inset-0 z-50 bg-charcoal/95 backdrop-blur-md flex items-center justify-center p-6">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white p-2">
+      <i data-lucide="x" class="w-8 h-8"></i>
+    </button>
+    <img id="lightbox-img" src="" alt="Ampliada" class="max-w-full max-h-full object-contain rounded">
+  </div>
+
+  <!-- JAVASCRIPT CON PROYECTOS Y LÓGICA DE FUNCIONAMIENTO -->
+  <script>
+    // BASE DE DATOS INICIAL CON TRABAJOS REALES DE ARQUITECTURA
+    let projectsData = [
+      {
+        id: 1,
+        title: "Filarmónica del Elba (Elbphilharmonie)",
+        category: "Arquitectura",
+        year: "2017",
+        badge: "Caso de Estudio",
+        description: "Obra icónica diseñada por Herzog & de Meuron. Estructura de cristal que se alza sobre un antiguo almacén de ladrillo en Hamburgo, integrando investigación acústica avanzada y revitalización urbana.",
+        specs: {
+          surface: "120,000 m²",
+          location: "Hamburgo, Alemania",
+          typology: "Cultural / Equipamiento",
+          software: "Rhino, Grasshopper, Revit",
+          materials: "Cristal Serigrafiado, Ladrillo Klinker, Panel de Fibra de Yeso"
+        },
+        sketches: [
+          "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80"
+        ],
+        diagrams: [
+          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
+        ],
+        hotspots: [
+          { id: 1, x: 40, y: 35, label: "Fachada de Vidrio Ondulado", desc: "Paneles de cristal curvados e impresos con tramado térmico para control solar.", img: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=400&q=80" },
+          { id: 2, x: 65, y: 70, label: "Basamento de Ladrillo", desc: "Estructura original de 1966 conservada para alojar parqueaderos y áreas técnicas.", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80" }
+        ],
+        initialState: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+        finalState: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1200&q=80",
+        cover: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id: 2,
+        title: "Renovación del Museo Neue Nationalgalerie",
+        category: "Transformaciones",
+        year: "2021",
+        badge: "Proceso Completo",
+        description: "Restauración integral del pabellón diseñado originalmente por Mies van der Rohe. Ejecutado por David Chipperfield Architects, desmontando más de 35,000 componentes originales para actualizar la tecnología técnica sin alterar el patrimonio.",
+        specs: {
+          surface: "13,900 m²",
+          location: "Berlín, Alemania",
+          typology: "Restauración Patrimonial",
+          software: "BIM Archicad, Laser Scanning 3D",
+          materials: "Acero Negro, Vidrio Templado Monumental, Mármol Granito"
+        },
+        sketches: [
+          "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+        ],
+        diagrams: [
+          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
+        ],
+        hotspots: [
+          { id: 1, x: 50, y: 50, label: "Pabellón de Cristal Superior", desc: "Sustitución de grandes cristales de fachada respetando las especificaciones de 1968.", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80" }
+        ],
+        initialState: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+        finalState: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+        cover: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id: 3,
+        title: "Investigación en Tipologías de Bambú Estructural",
+        category: "Investigación & Ensayos",
+        year: "2024",
+        badge: "Publicación Académica",
+        description: "Estudio exhaustivo y pruebas de resistencia sobre ensambles mecánicos con Guadua angustifolia Kunth para estructuras de luces libres sostenibles en zonas tropicales.",
+        specs: {
+          surface: "N/A (Investigación)",
+          location: "Bogotá, Colombia",
+          typology: "Investigación de Materiales",
+          software: "ANSYS Mechanical, Rhino Grasshopper",
+          materials: "Bambú Guadua, Pernos de Acero Inoxidable, Resinas Epóxicas"
+        },
+        sketches: [
+          "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+        ],
+        diagrams: [
+          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
+        ],
+        hotspots: [],
+        initialState: "",
+        finalState: "",
+        cover: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        id: 4,
+        title: "Casa de la Música en Aalborg",
+        category: "Diseño de Interiores",
+        year: "2014",
+        badge: "Caso de Estudio",
+        description: "Interiorismo acústico por Coop Himmelb(l)au. Diseño fluido de salas interconectadas que maximizan la resonancia sonora con un lenguaje expresionista en concreto y paneles personalizados.",
+        specs: {
+          surface: "20,000 m²",
+          location: "Aalborg, Dinamarca",
+          typology: "Interiorismo / Acústica",
+          software: "Maya, Revit, CATT-Acoustic",
+          materials: "Concreto Encofrado, Yeso Reforzado con Fibra, Roble Claro"
+        },
+        sketches: [
+          "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80"
+        ],
+        diagrams: [
+          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
+        ],
+        hotspots: [],
+        initialState: "",
+        finalState: "",
+        cover: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
+      }
+    ];
+
+    let currentProject = null;
+    let currentTab = 'sketches';
+    let currentLang = 'ES';
+    let currentCategoryFilter = 'Todos';
+
+    // RENDERIZAR GRID DE PROYECTOS
+    function renderProjectsGrid() {
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+
+      const filtered = currentCategoryFilter === 'Todos' 
+        ? projectsData 
+        : projectsData.filter(p => p.category === currentCategoryFilter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 text-warmgray">
+            <i data-lucide="folder-open" class="w-12 h-12 mx-auto mb-3 opacity-40"></i>
+            <p class="font-serif text-lg">No hay publicaciones en esta sección todavía.</p>
+            <button onclick="openModal()" class="mt-3 text-xs text-terracotta font-bold uppercase underline tracking-wider">¡Sé el primero en publicar!</button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      filtered.forEach(project => {
+        const card = document.createElement('article');
+        card.className = "project-card group cursor-pointer bg-white rounded-lg border border-warmgray/15 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col";
+        card.onclick = () => openProject(project.id);
+
+        card.innerHTML = `
+          <div class="relative overflow-hidden aspect-[4/3] bg-linen">
+            <span class="absolute top-3 left-3 z-10 bg-linen/90 backdrop-blur-sm text-charcoal text-[10px] px-2.5 py-1 uppercase tracking-wider font-bold rounded border border-warmgray/10 shadow-sm">${project.badge}</span>
+            <img src="${project.cover}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+          </div>
+          <div class="p-5 flex flex-col flex-grow justify-between">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-terracotta tracking-wider">${project.category}</span>
+              <h3 class="font-serif text-xl font-bold text-charcoal group-hover:text-terracotta transition-colors mt-1 leading-snug">${project.title}</h3>
+              <p class="text-xs text-warmgray mt-2 line-clamp-2 leading-relaxed">${project.description || ''}</p>
+            </div>
+            <div class="flex justify-between items-center pt-4 mt-4 border-t border-warmgray/10 text-xs text-warmgray">
+              <span>Año ${project.year}</span>
+              <span class="font-semibold text-terracotta flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Ver Detalles <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // FILTRADO
+    function filterCategory(category) {
+      currentCategoryFilter = category;
+      
+      const cards = document.querySelectorAll('.cat-card');
+      cards.forEach(card => {
+        if (card.getAttribute('data-cat') === category) {
+          card.classList.add('border-terracotta', 'bg-white');
+          card.classList.remove('border-warmgray/15');
+        } else {
+          card.classList.remove('border-terracotta');
+          card.classList.add('border-warmgray/15');
+        }
+      });
+
+      const grid = document.getElementById('projects-grid');
+      grid.style.opacity = '0';
+      setTimeout(() => {
+        renderProjectsGrid();
+        grid.style.opacity = '1';
+      }, 200);
+    }
+
+    // NAVEGACIÓN Y DETALLE
+    function showHome() {
+      document.getElementById('view-detail').classList.add('hidden');
+      document.getElementById('view-home').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openProject(id) {
+      currentProject = projectsData.find(p => p.id === id);
+      if (!currentProject) return;
+
+      document.getElementById('detail-title').innerText = currentProject.title;
+      document.getElementById('detail-category').innerText = currentProject.category;
+      document.getElementById('detail-badge').innerText = currentProject.badge;
+      document.getElementById('detail-description').innerText = currentProject.description || 'Sin descripción detallada disponible.';
+
+      document.getElementById('spec-surface').innerText = currentProject.specs.surface || 'N/A';
+      document.getElementById('spec-location').innerText = currentProject.specs.location || 'N/A';
+      document.getElementById('spec-typology').innerText = currentProject.specs.typology || 'N/A';
+      document.getElementById('spec-software').innerText = currentProject.specs.software || 'N/A';
+      document.getElementById('spec-materials').innerText = currentProject.specs.materials || 'N/A';
+
+      switchConceptTab('sketches');
+
+      // Hotspots
+      if (currentProject.hotspots && currentProject.hotspots.length > 0) {
+        document.getElementById('block-hotspots').classList.remove('hidden');
+        renderHotspots();
+      } else {
+        document.getElementById('block-hotspots').classList.add('hidden');
+      }
+
+      // Slider Antes/Después
+      if (currentProject.initialState && currentProject.finalState) {
+        document.getElementById('block-slider').classList.remove('hidden');
+        document.getElementById('img-before').src = currentProject.initialState;
+        document.getElementById('img-after').src = currentProject.finalState;
+        
+        setTimeout(() => {
+          const sliderContainer = document.getElementById('comparison-slider');
+          document.getElementById('img-before').style.width = sliderContainer.offsetWidth + 'px';
+        }, 100);
+      } else {
+        document.getElementById('block-slider').classList.add('hidden');
+      }
+
+      document.getElementById('detail-render-main').src = currentProject.cover;
+
+      document.getElementById('view-home').classList.add('hidden');
+      document.getElementById('view-detail').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchConceptTab(tab) {
+      currentTab = tab;
+      const btnSketches = document.getElementById('btn-tab-sketches');
+      const btnDiagrams = document.getElementById('btn-tab-diagrams');
+      const gallery = document.getElementById('concept-gallery');
+
+      if (tab === 'sketches') {
+        btnSketches.className = "px-4 py-1.5 text-xs font-semibold rounded transition-all bg-linen text-charcoal";
+        btnDiagrams.className = "px-4 py-1.5 text-xs font-semibold rounded transition-all text-warmgray hover:text-charcoal";
+      } else {
+        btnDiagrams.className = "px-4 py-1.5 text-xs font-semibold rounded transition-all bg-linen text-charcoal";
+        btnSketches.className = "px-4 py-1.5 text-xs font-semibold rounded transition-all text-warmgray hover:text-charcoal";
+      }
+
+      const images = tab === 'sketches' ? (currentProject.sketches || []) : (currentProject.diagrams || []);
+      
+      if (images.length === 0) {
+        gallery.innerHTML = `<p class="text-xs text-warmgray italic col-span-2 py-4">No se han adjuntado imágenes para esta categoría.</p>`;
+        return;
+      }
+
+      gallery.innerHTML = images.map(img => `
+        <div class="relative group bg-white border border-warmgray/10 rounded-lg overflow-hidden cursor-pointer shadow-sm" onclick="openLightbox('${img}')">
+          <img src="${img}" alt="Concepto" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <i data-lucide="maximize-2" class="w-6 h-6 text-white"></i>
+          </div>
+        </div>
+      `).join('');
+      
+      lucide.createIcons();
+    }
+
+    // MANEJO DE PUBLICACIÓN Y SUBIDA DE IMÁGENES
+    function openModal() {
+      document.getElementById('modal-add-project').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-add-project').classList.add('hidden');
+      document.getElementById('form-project').reset();
+    }
+
+    // Convertir archivo subido local a URL Base64 para visualización directa
+    function handleFileUpload(event, inputTargetId) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById(inputTargetId).value = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleSaveProject(event) {
+      event.preventDefault();
+
+      const title = document.getElementById('input-title').value;
+      const category = document.getElementById('input-category').value;
+      const badge = document.getElementById('input-badge').value;
+      const description = document.getElementById('input-description').value;
+
+      const coverUrl = document.getElementById('input-cover-url').value || 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80';
+      const sketchUrl = document.getElementById('input-sketch-url').value || coverUrl;
+      const beforeUrl = document.getElementById('input-before-url').value;
+
+      const surface = document.getElementById('input-surface').value || 'N/A';
+      const location = document.getElementById('input-location').value || 'N/A';
+      const typology = document.getElementById('input-typology').value || 'N/A';
+
+      const newProj = {
+        id: Date.now(),
+        title: title,
+        category: category,
+        year: new Date().getFullYear().toString(),
+        badge: badge,
+        description: description,
+        specs: {
+          surface: surface,
+          location: location,
+          typology: typology,
+          software: "Modelado Digital",
+          materials: "Especificación Técnica del Autor"
+        },
+        sketches: [sketchUrl],
+        diagrams: [sketchUrl],
+        hotspots: [],
+        initialState: beforeUrl || "",
+        finalState: beforeUrl ? coverUrl : "",
+        cover: coverUrl
+      };
+
+      projectsData.unshift(newProj);
+      renderProjectsGrid();
+      closeModal();
+
+      alert('¡Proyecto e investigación publicados exitosamente en el portafolio!');
+    }
+
+    // HOTSPOTS
+    function renderHotspots() {
+      const container = document.getElementById('hotspots-container');
+      container.innerHTML = currentProject.hotspots.map(hs => `
+        <button
+          style="top: ${hs.y}%; left: ${hs.x}%;"
+          onclick="openPopover(${hs.id})"
+          class="absolute transform -translate-x-1/2 -translate-y-1/2 group"
+        >
+          <span class="relative flex h-6 w-6">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-terracotta opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-6 w-6 bg-terracotta text-white text-xs items-center justify-center font-bold shadow">
+              ${hs.id}
+            </span>
+          </span>
+        </button>
+      `).join('');
+      closePopover();
+    }
+
+    function openPopover(hsId) {
+      const hs = currentProject.hotspots.find(h => h.id === hsId);
+      if (!hs) return;
+
+      document.getElementById('popover-title').innerText = hs.label;
+      document.getElementById('popover-desc').innerText = hs.desc;
+      document.getElementById('popover-img').src = hs.img;
+      document.getElementById('hotspot-popover').classList.remove('hidden');
+    }
+
+    function closePopover() {
+      document.getElementById('hotspot-popover').classList.add('hidden');
+    }
+
+    // SLIDER COMPARATIVO
+    const slider = document.getElementById('comparison-slider');
+    const beforeContainer = document.getElementById('slider-before-container');
+    const handle = document.getElementById('slider-handle');
+    let isSliding = false;
+
+    function updateSlider(x) {
+      const rect = slider.getBoundingClientRect();
+      let pos = x - rect.left;
+      if (pos < 0) pos = 0;
+      if (pos > rect.width) pos = rect.width;
+
+      const percentage = (pos / rect.width) * 100;
+      beforeContainer.style.width = `${percentage}%`;
+      handle.style.left = `${percentage}%`;
+    }
+
+    slider.addEventListener('mousedown', (e) => {
+      isSliding = true;
+      updateSlider(e.clientX);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isSliding) updateSlider(e.clientX);
+    });
+
+    window.addEventListener('mouseup', () => {
+      isSliding = false;
+    });
+
+    // LIGHTBOX
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ES' ? 'EN' : 'ES';
+      document.getElementById('lang-text').innerText = currentLang;
+    }
+
+    // INICIALIZACIÓN
+    window.onload = () => {
+      renderProjectsGrid();
+    };
+  </script>
+</body>
+</html>
